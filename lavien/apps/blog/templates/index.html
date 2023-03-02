@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--================End Slider Area =================-->
+
+<!--================Welcome Area =================-->
+<section class="wel_bakery_two">
+    {% load static %}
+<div class="container">
+  <div class="welcome_bakery_inner p_100">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="main_title">
+      <h2>Добро пожаловать, дорогой волонтер!</h2>
+      <p>Данный сайт предназначен для новых волонтеров, которые ищут возможности 
+        участия в различных благотворительных проектах. 
+        На сайте вы найдете информацию о волонтерских организаций, оставить им заявку и следить за недавними новостями.</p>
+        <a class="pink_btn" href="{% url 'about_me' %}">Подробная информация, о разработчике
+</a>
+    </div>
+        
+      </div>
+      <div class="col-lg-6">
+        <div class="welcome_img">
+          <img class="img-fluid" src="{% static 'images/volonteer3.jpg' %}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+{% endblock %}

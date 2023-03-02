@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<section>
+    <div class="main_title ">
+    <h2 >Направления волонтерских организаций </h2>
+    <h5>Волонтерство - добровольная деятельность!</h5>
+</div>
+{% for category in object_list %}
+<div class="specail_item lavien-item">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="s_left_img">
+                <img class="img-fluid" src="{{ category.icon.url }}" alt="">
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="special_item_text">
+                <h4 class="lavien_title">{{ category.name }}</h4>
+                <p class="lavien_description">{{category.description}}</p>
+                <a class="pink_btn" href="{% url 'filter_category' category.id %}">Посмотреть организации</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+{% endfor %}
+{% endblock%}

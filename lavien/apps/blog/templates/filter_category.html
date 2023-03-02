@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+  
+<section class="service_offer_area p_100">
+    <div class="container">
+
+        </div>
+        <div class="row service_main_item_inner">
+                {% for organizations in object_list  %}
+              
+            <div class="col-lg-4 col-sm-6">
+                <div class="service_m_item">
+                    <div class="service_img_inner">
+                        <div class="service_img">
+                            <img class="rounded-circle" src="{{ organizations.picture.url }}" alt="">
+                        </div>
+                    </div>
+                    <div class="service_text">
+                        <a href="{% url 'organizations_detail' organizations.id %}"><h4>{{organizations.org_name}}</h4></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <h2 class="empty-h2">На данный момент, организаций по этому направлению не существует!(</h2>  
+{% endfor %}
+
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+
+
+<!--================Blog Main Area =================-->
+<section class="main_blog_area p_100">
+    <div class="container">
+        <div class="row blog_area_inner">
+            <div class="col-lg-9">
+                <div class="main_blog_inner single_blog_inner">
+                    <div class="blog_item">
+                        <div class="blog_img">
+                            <img class="img-fluid" src="{{object.image.url}}" alt="">
+                        </div>
+                        <div class="blog_text">
+                            <div class="blog_time">
+                                <div class="float-left">
+                                    <a href="#">{{object.created}}</a>
+                                </div>
+                                <div class="float-right">
+                                    <ul class="list_style">
+                                        <li><a href="#">By :  {{object.author.username}}</a></li>
+                                        <li><a href="#">{{object.category}}</a></li>
+                                        <li><a href="#">Comments: 8</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a href="#"><h4>{{object.title}}</h4></a>
+                            <p>{{object.description|safe}}</p>
+                        </div>
+                    </div>
+                  
+                       <div class="s_comment_list">
+                        <h3 class="cm_title_br">Комментарии: </h3>
+
+                        {% for comment in object.comments.all %}
+                        <div class="s_comment_list_inner">
+                            <div class="media">
+                                
+                                <div class="media-body">
+                                    <h4>{{ comment.author.username }}</h4>
+                                    <p>{{comment.created}}</p>
+                                    <div class="date_rep">
+                                        <a href="#">{{ comment.text }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="s_comment_area">
+                        <h3 class="cm_title_br">Оставить комментарий</h3>
+                        <div class="s_comment_inner">
+                            <form class="row contact_us_form" action="{% url 'create_comment' object.id %}" method="post">
+                                {% csrf_token %}
+                                {{ comment_form }}
+                               
+                                <div class="form-group col-md-12">
+                                    <button type="submit" value="submit" class="btn order_s_btn form-control">Отправить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-3">
+                <div class="right_sidebar_area">
+                    <aside class="r_widget search_widget">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter Search Keywords">
+                            <div class="input-group-append">
+                                <button class="btn" type="button"><i class="icon icon-Search"></i></button>
+                            </div>
+                        </div>
+                    </aside>
+                    <aside class="r_widget categories_widget">
+                        <div class="r_title">
+                            <h3>Categories</h3>
+                        </div>
+                           <ul class="list_style">
+                               <li><a href="#">Chocolates<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                               <li><a href="#">Summer Caket<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                               <li><a href="#">Ice Cream<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                               <li><a href="#">Lollipop<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                               <li><a href="#">Sweet<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                               <li><a href="#">Bakery<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                           </ul>
+                    </aside>
+                    <aside class="r_widget recent_widget">
+                        <div class="r_title">
+                            <h3>Recent News</h3>
+                        </div>
+                           <div class="recent_w_inner">
+                               <div class="media">
+                                <div class="d-flex">
+                                    <img src="img/blog/recent-post/r-post-1.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>A very bad quack might jinx zippy fowls ...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="img/blog/recent-post/r-post-2.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>Big Steps to change management succes...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="img/blog/recent-post/r-post-3.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>A paradisematic country, where roasted parts...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="img/blog/recent-post/r-post-4.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>A wonderful serenity has taken possession...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                           </div>
+                    </aside>
+                    <aside class="r_widget tags_widget">
+                        <div class="r_title">
+                            <h3>Tags</h3>
+                        </div>
+                           <ul class="list_style">
+                               <li><a href="#">Baking Tips</a></li>
+                               <li><a href="#">Bakery</a></li>
+                               <li><a href="#">Recipe</a></li>
+                               <li><a href="#">Baking Tool</a></li>
+                               <li><a href="#">Cakes</a></li>
+                               <li><a href="#">Chocolates</a></li>
+                           </ul>
+                    </aside>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

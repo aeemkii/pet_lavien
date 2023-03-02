@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<section class="submit-recipe-page-wrap padding-top-74 padding-bottom-50">
+    <div class="container">
+        <div class="row gutters-60">
+            <div class="col-lg-8">
+                                                                                                                                                                                                                                                                                
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %} 
+                            <div class="alert alert-danger">
+                                <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                <form class="submit-recipe-form" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                   
+                   
+                    <button type="submit" class="btn pink_more">Отправить фото</button>
+
+
+                    <div class="toast-container position-absolute top-0 end-0 p-3">
+  
+                        <!-- Then put toasts within -->
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                          <div class="toast-header">
+                            <img src="..." class="rounded me-2" alt="...">
+                            <strong class="me-auto">Bootstrap</strong>
+                            <small class="text-muted">just now</small>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                          </div>
+                          <div class="toast-body">
+                            See? Just like this.
+                          </div>
+                        </div>
+                    
+                      </div>
+                    </div>
+                </form>
+            </div>
+          
+        </div>
+    </div>
+</section>
+
+{% endblock %}

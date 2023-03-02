@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="product_details_area p_100">
+    <div class="container">
+        <div class="row product_d_price">
+            <div class="col-lg-6">
+                <div class="product_img"><img class="img-fluid" src="{{organization.picture.url}}" alt=""></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product_details_text">
+                    <h4>{{organization.org_name}}</h4>
+                    <p>{{organization.description}}</p>
+                      <h4>Наши контакты:</h4>
+                    <p>Электронная почта: {{organization.email}}</p>
+                    <p>Номер телефона: {{organization.mobile}}</p>
+
+                    <div class="row">
+                        <a class="pink_more" href="{% url 'add_memory' %}">Добавить фотографию</a>
+                        
+                        <button type="button" style="border: none;" class="pink_more" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Стать волонтером</button>
+                    </div>
+                    
+            </div>
+        </div>
+        <div class="product_tab_area">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Descripton</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Воспоминания</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <p>{{organization.dop_dscr}}</p>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="page-body">
+                        <div class="container-xl">
+                          <div class="row row-cols-6 g-3">
+                            {% for photo in media %}
+                               
+                                    
+                                    <div class="flex flex-wrap gap-5 max-w-5xl mx-auto px-6">
+                                        <a data-fancybox="gallery" href="{{photo.image.url}}">
+                                        <img class="rounded" style="width: 100%;" src="{{photo.image.url}}" />
+                                        <p style="text-align: center;">{{photo.title}}</p>
+                                        </a>
+
+                                    </div>
+                                                              
+                            {% empty %}
+                                <p>В данный момент фотографий нет.</p>
+                            {% endfor %}
+                            
+              
+                          </div>
+                        </div>
+                      </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>  
+      <form method="post" action="{% url 'add_voluenteer' organization.id %}">
+      <div class="modal-body">
+      
+            {% csrf_token %}
+            {{form.as_p}}
+            
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit"class="btn btn-success">Отправить</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block css %}
+  {{ form.media.css }}
+{% endblock %}
+
+{% block js %}
+  {{ form.media.js }}
+{% endblock %}
+
+

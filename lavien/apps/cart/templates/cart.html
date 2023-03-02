@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<section class="cart_table_area p_100">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Изображение</th>
+                        <th scope="col">Продукт</th>
+                        <th scope="col">Цена</th>
+                        <th scope="col">Количество</th>
+                        <th scope="col">Общая сумма
+                        </th>
+                        <th scope="col">Действия</th>
+                    </tr>
+                </thead>
+                {% for item in cart %}
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="{{item.product.image.url}}" alt="">
+                        </td>
+                        <td>{{item.product.name}}</td>
+                        <td>{{item.price}}</td>
+                        <td>
+                           {{item.quantity}}
+                        </td>
+                        <td>{{item.total_price}}</td>
+                      <td>  <a href="{% url 'delete_cart' item.product.id %}"> X</a></td></a>
+                    </tr> 
+                    <tr>
+                       
+                       
+                            
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+          
+    </div>
+</section>
+
+{% endblock %}

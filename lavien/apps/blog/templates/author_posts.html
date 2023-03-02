@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="single-author-page-wrap padding-top-80 padding-bottom-50">
+    <div class="container">
+        <div class="row gutters-60">
+            <div class="col-lg-8">
+                
+                <div class="section-heading heading-dark">
+                    <h2 class="item-heading">Количество публикаций: {{ object_list.count }}</h2>
+                </div>
+                <div class="row">
+                    {% for post in object_list %}
+                    <div class="col-md-6 col-sm-6 col-12">
+                        <div class="product-box-layout1">
+                            <figure class="item-figure"><a href="single-recipe1.html">
+                                <img src="{{post.image.url}}" alt="Product"></a></figure>
+                            <div class="item-content">
+                                <span class="sub-title">{{ post.category.name }}</span>
+                                <h3 class="item-title"><a href="{% url 'post_detail' post.id %}">{{post.title}}</a></h3>
+                               
+                                <p>{{ post.description|truncatechars_html:100 }}</p>
+                                <ul class="entry-meta">
+                
+                                    <li><a href="#"><i class="fas fa-user"></i>{{ post.author.username }}</a></li>
+                                   
+                                </ul>
+                                <a href="{% url 'update_post' post.id %}" class="btn btn-primary">
+                                 Редактировать
+                                </a>
+                                <a href="{% url 'post_delete' post.id %}" class="btn btn-danger">
+                               Удалить
+                            </a>
+
+                                {% if not post.is_draft %}
+                                <a href="{% url 'deactivate_post' post.id %}" class="btn btn-secondary">
+                               Деактивировать
+                        </a> -->
+                                {% else %}
+                                <a href="{% url 'activate_post' post.id%}" class="btn btn-success">Опубликовать</a>
+                                 {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <ul class="pagination-layout1">
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+                    
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                    
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
